@@ -8,6 +8,10 @@
 #= require jquery-ujs
 #= require foundation
 #= require current_user
+#= require moment
+#= require fullcalendar
+#= require_tree ./plugins
+#= require_tree ./custom
 #= require_tree ../templates
 #= require_tree .
 

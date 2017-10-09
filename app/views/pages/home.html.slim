@@ -1,4 +1,8 @@
 .row
   .columns
-    h2
-      = title("Home")
+    - if current_user
+      #calendar
+
+= content_for(:javascript_code) do
+  | ModalManager.hide_modal();
+  | EventForm.init();
