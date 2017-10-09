@@ -14,6 +14,7 @@ gem "mini_racer"
 gem "premailer-rails"
 gem "sass-rails", "~> 5.0.0", ">= 5.0.6"
 gem "uglifier", ">= 2.7.2"
+gem "font-awesome-sass"
 
 source "https://rails-assets.org" do
   gem "rails-assets-jquery-ujs"
@@ -46,6 +47,11 @@ gem "responders"
 gem "rollbar"
 gem "seedbank"
 gem "stackprof"
+
+gem "fullcalendar-rails"
+gem "momentjs-rails"
+gem "enumerize"
+gem "active_model_serializers"
 
 group :staging, :production do
   gem "newrelic_rpm"
