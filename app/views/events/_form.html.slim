@@ -1,0 +1,65 @@
+= simple_form_for event,
+  as: "event",
+  remote: true do |f|
+
+  .row
+    .small-12.columns
+      = f.input :title
+
+  - if f.object.persisted?
+    .row
+      .small-12.columns
+        =<> check_box_tag :update_future_events, true, true
+        | Update all dependent future events
+
+  .js-event-periodicity-field
+    .row
+      .small-12.columns
+        | Select the option to repeat the event
+
+    .row
+      .small-12.columns
+        = f.select :periodicity, Event.periodicity.options
+
+  .row.js-event-start-field
+    .small-12.columns
+      = f.input :start,
+        as: :string,
+        input_html: { \
+          class: "js-datepicker",
+          value: f.object.persisted? ? localize(f.object.start, format: "%d-%m-%Y %H:%M") : "" \
+        }
+
+  .row.js-event-finish-field class="#{f.object.finish.present? ? '' : 'hide'}"
+    .small-12.columns
+      = f.input :finish,
+        as: :string,
+        input_html: { \
+         class: "js-datepicker",
+         value: f.object.finish.present? ? localize(f.object.finish, format: "%d-%m-%Y") : "" \
+        }
+
+  .row
+    .small-12.columns
+      | Select the duration of the event
+
+  .row
+    .small-12.columns
+      = f.select :duration, Event::DURATION
+
+  .row
+    .small-12.columns
+      = f.input :description
+
+  .row
+    .small-12.columns
+      = f.input :public, label: "To make the event public?",
+                         as: :boolean,
+                         checked_value: true,
+                         unchecked_value: false
+  br
+
+  .row
+    .small-12.columns
+      .actions
+        = f.button :submit

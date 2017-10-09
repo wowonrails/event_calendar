@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include BulletHelper
 
   protect_from_forgery with: :exception
+  before_action :authenticate_user!
 
   responders :flash
   respond_to :html

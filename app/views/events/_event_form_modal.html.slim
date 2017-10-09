@@ -1,0 +1,9 @@
+.reveal data-reveal="" id="js-event-form-#{event.persisted? ? event.id : 'new'}"
+
+  p.lead
+    = event.persisted? ? "Edit #{event.title}" : "Create Event"
+
+  = render 'events/form'
+
+  button.close-button aria-label=("Close modal") data-close="" type="button"
+    span aria-hidden="true"  &times;

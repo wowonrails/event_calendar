@@ -1,0 +1,57 @@
+.reveal data-reveal="" id="js-#{dom_id(event)}"
+  p.lead
+
+  .js-event-section
+    .card
+      .card-section
+        .row
+          .small-4.columns
+            strong Title:
+
+          .small-8.columns
+            =<> event.title
+
+        .row
+          .small-4.columns
+            strong Description:
+
+          .small-8.columns
+            =<> event.description
+
+        .row
+          .small-4.columns
+            strong Start:
+
+          .small-8.columns
+            =<> event.start.strftime("%d-%m-%Y %H:%M")
+
+        .row
+          .small-4.columns
+            strong Duration:
+
+          .small-8.columns
+            =<> Event::DURATION.index(event.duration)
+
+        - if event.finish
+          .row
+            .small-4.columns
+              strong Finish:
+
+            .small-8.columns
+              =<> event.finish.strftime("%d-%m-%Y")
+
+      .row
+        .small-8.columns
+        .small-4.columns
+          = link_to 'Edit', edit_event_path(event),
+                            class: "button",
+                            remote: true
+
+          =<> link_to 'Delete', event_path(event),
+                                method: :delete,
+                                class: "alert button",
+                                data: { confirm: "Are you sure?" },
+                                remote: true
+
+  button.close-button aria-label=("Close modal") data-close="" type="button"
+    span aria-hidden="true"  &times;

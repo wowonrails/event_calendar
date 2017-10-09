@@ -1,0 +1,7 @@
+- if event.valid?
+  | $(".reveal-overlay").remove();
+  | $(".datepicker").remove();
+  | $('#calendar').fullCalendar('refetchEvents');
+- else
+  | $("#new_event").html("#{ j render('events/form', event: event) }");
+  | FoundationDatepicker.init();
