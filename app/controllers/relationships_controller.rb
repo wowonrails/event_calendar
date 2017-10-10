@@ -7,9 +7,13 @@ class RelationshipsController < ApplicationController
 
   def create
     self.relationship = current_user.relationships.create!(followed_id: user.id)
+
+    redirect_to user_path(user)
   end
 
   def destroy
     relationship.destroy
+
+    redirect_to user_path(user)
   end
 end

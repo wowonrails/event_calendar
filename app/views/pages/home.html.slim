@@ -4,5 +4,6 @@
       #calendar
 
 = content_for(:javascript_code) do
+  | EventsCalendar.init('events');
   | ModalManager.hide_modal();
   | EventForm.init();

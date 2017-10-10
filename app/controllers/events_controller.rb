@@ -1,13 +1,14 @@
 class EventsController < ApplicationController
   expose(:event) do
     if params[:id]
-      current_user.events.find(params[:id])
+      events.find(params[:id])
     else
       Event.new
     end
   end
 
-  expose(:events) { current_user.events }
+  expose(:events) { user.events }
+  expose(:user) { current_user }
 
   def index
     render json: events
@@ -23,7 +24,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    self.event = current_user.events.new(event_params)
+    self.event = events.new(event_params)
 
     event.recurring_event! if event.save
   end

@@ -1,12 +1,9 @@
 .js-users-list
-  .row
-    .medium-4.columns
-    .medium-8.columns
-      ul.no-bullet
-        - users.find_each do |user|
-          li
-            = link_to user_path(user) do
-              = user.full_name
+  ul.no-bullet
+    - users.find_each do |user|
+      li
+        = link_to user_path(user) do
+          = user.full_name
 
   .pagination.text-center
     = paginate users

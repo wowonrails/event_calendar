@@ -74,6 +74,10 @@ class Event < ApplicationRecord
     where(["title = ? and start > ?", event.title, event.start])
   }
 
+  scope :public_events, -> {
+    where(public: true)
+  }
+
   def recurring_event!
     unless periodicity == "once"
       number_of_repetitions.times do |i|

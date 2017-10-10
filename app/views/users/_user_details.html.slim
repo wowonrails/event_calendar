@@ -1,10 +1,13 @@
-p.lead
+- if policy(user).following?
+  #calendar
 
-.card
-  .card-section
-    .row
-      .small-4.columns
-        strong E-mail:
+- else
+  p.lead
+  .card
+    .card-section
+      .row
+        .small-4.columns
+          strong E-mail:
 
-      .small-8.columns
-        =<> user.email
+        .small-8.columns
+          =<> user.email
