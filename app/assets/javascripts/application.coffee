@@ -10,6 +10,7 @@
 #= require current_user
 #= require moment
 #= require fullcalendar
+#= require fragments
 #= require_tree ./plugins
 #= require_tree ./custom
 #= require_tree ../templates
