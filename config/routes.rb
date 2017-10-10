@@ -7,7 +7,6 @@ Rails.application.routes.draw do
     resources :followed_users, only: :index
     resources :followers, only: :index
     resources :other_users, only: :index
+    resources :relationships, only: [:create, :destroy]
   end
-
-  resources :relationships, only: [:create, :destroy]
 end

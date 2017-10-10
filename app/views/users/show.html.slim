@@ -1,29 +1,20 @@
 .row
   .columns
-    h2 = title("My profile")
+    h2 = title(current_user.is_it_me?(user) ? "My Profile" : "#{user.full_name}")
 
 .row
   .medium-4.columns
     = render 'users/user_details'
 
   .medium-8.columns
-    .expanded.button-group.js-profile-buttons
-      = link_to user_followed_users_path(user), class: "button secondary", remote: true do
-        strong
-          =<> user.followed_users.count
-          | following
+    = render 'users/follow_form' unless current_user.is_it_me?(user)
 
-      = link_to user_followers_path(user), class: "button secondary", remote: true do
-        strong
-          =<> user.followers.count
-          | followers
+    .relationships
+      = render 'users/buttons'
 
-      = link_to user_other_users_path(user), class: "button secondary disabled", remote: true do
-        strong
-          | Other users
-    hr
-    = render 'users/list', users: other_users
-    hr
+      hr
+      = render 'users/list', users: other_users
+      hr
 
 = content_for(:javascript_code) do
   | UsersList.init();
