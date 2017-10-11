@@ -1,9 +1,16 @@
 .row
-  .columns
-    - if current_user
-      #calendar
+  .medium-8.columns
+    #calendar
+
+  .medium-4.columns
+    = render 'users/buttons'
+
+    hr
+    = render 'users/list', users: other_users
+    hr
 
 = content_for(:javascript_code) do
   | EventsCalendar.init('events');
+  | UsersList.init();
   | ModalManager.hide_modal();
   | EventForm.init();

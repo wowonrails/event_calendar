@@ -3,9 +3,9 @@ window.EventsCalendar =
     $('#calendar').fullCalendar
       firstDay: 1
       header: {
-        left:   'prev,next, today',
-        center: 'title',
-        right:  'month,agendaWeek,agendaDay,listWeek'
+        left:   'today',
+        center: 'prev, title, next',
+        right:  'month,listWeek'
       }
       timeFormat: 'H:mm'
       events: "/#{path}.json"
