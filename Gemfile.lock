@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/fs/fragments.js.git
+  revision: 4d786b7a53ccc487dec3008e789aaaf14b8b0c5d
+  specs:
+    fragments.js (0.0.1)
+
+GIT
   remote: https://github.com/MiniProfiler/rack-mini-profiler.git
   revision: 1b79f49f36dfe16f7a8c9c75753decb37bec186c
   specs:
@@ -486,6 +492,7 @@ DEPENDENCIES
   formulaic
   foundation-icons-sass-rails
   foundation-rails
+  fragments.js!
   fullcalendar-rails
   google-analytics-rails
   guard-rspec

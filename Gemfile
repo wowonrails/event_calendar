@@ -52,6 +52,7 @@ gem "fullcalendar-rails"
 gem "momentjs-rails"
 gem "enumerize"
 gem "active_model_serializers"
+gem "fragments.js", github: "fs/fragments.js"
 
 group :staging, :production do
   gem "newrelic_rpm"

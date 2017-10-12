@@ -1,17 +1,22 @@
-p.lead
+- if policy(user).following?
+  #calendar
 
-.card
-  .card-section
-    .row
-      .small-4.columns
-        strong Profile:
+- else
+  .card
+    .card-section
+      .row
+        .small-4.columns
+          strong E-mail:
 
-      .small-8.columns
-        =<> user.full_name
+        .small-8.columns
+          =<> user.email
 
-    .row
-      .small-4.columns
-        strong E-mail:
+      - unless policy(user).is_it_me?
+        br
+        br
+        .card
+          .card-section
+            h4
+              | If you want to see my public events
+          = image_tag "follow_me.jpeg"
 
-      .small-8.columns
-        =<> user.email

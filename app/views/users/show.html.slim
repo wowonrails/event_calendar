@@ -1,29 +1,22 @@
 .row
   .columns
-    h2 = title("My profile")
-
+    h4 = title(policy(user).is_it_me? ? "My Profile" : "#{user.full_name}")
+br
 .row
-  .medium-4.columns
+  .medium-8.columns
     = render 'users/user_details'
 
-  .medium-8.columns
-    .expanded.button-group.js-profile-buttons
-      = link_to user_followed_users_path(user), class: "button secondary", remote: true do
-        strong
-          =<> user.followed_users.count
-          | following
+  .medium-4.columns
+    = render 'users/follow_form' unless policy(user).is_it_me?
 
-      = link_to user_followers_path(user), class: "button secondary", remote: true do
-        strong
-          =<> user.followers.count
-          | followers
+    = render 'users/buttons'
 
-      = link_to user_other_users_path(user), class: "button secondary disabled", remote: true do
-        strong
-          | Other users
     hr
     = render 'users/list', users: other_users
     hr
 
 = content_for(:javascript_code) do
+  | EventsCalendar.init("users/#{user.id}/events");
   | UsersList.init();
+  | ModalManager.hide_modal();
+  | EventForm.init();

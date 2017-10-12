@@ -1,18 +1,19 @@
 class RelationshipsController < ApplicationController
-  expose(:relationship) { current_user }
+  expose :relationship
+  expose(:user) { User.find(params[:user_id]) }
+  expose(:other_users) do
+    User.other_users(user).order(:full_name).page(params[:page])
+  end
 
   def create
+    self.relationship = current_user.relationships.create!(followed_id: user.id)
+
+    redirect_to user_path(user)
   end
 
   def destroy
-  end
+    relationship.destroy
 
-  private
-
-  def relationship_params
-    params.require(:relationship).permit(
-      :title,
-      :public
-    )
+    redirect_to user_path(user)
   end
 end

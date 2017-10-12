@@ -1,10 +1,11 @@
 class OtherUsersController < ApplicationController
   expose(:user) { User.find(params[:user_id]) }
 
-  expose(:other_users) do
+  expose(:users) do
     User.other_users(user).order(:full_name).page(params[:page])
   end
 
   def index
+    render "users/_list", users: users, layout: false
   end
 end

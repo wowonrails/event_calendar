@@ -1,9 +1,11 @@
-<% unless current_user?(@user) %>
-  <div id="follow_form">
-  <% if current_user.following?(@user) %>
-    <%= render 'unfollow' %>
-  <% else %>
-    <%= render 'follow' %>
-  <% end %>
-  </div>
-<% end %>
+- if policy(user).following?
+  = link_to user_relationship_path(user, relationship), method: :delete,
+                                         class: "button alert small expanded follow-form",
+                                         data: { confirm: "Are you sure?" } do
+    strong
+      | Unfollow
+- else
+  = link_to user_relationships_path(user), method: :post,
+                                           class: "button small expanded follow-form" do
+    strong
+      | Follow
