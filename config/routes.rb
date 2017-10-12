@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
-  root to: "pages#home"
   devise_for :users, controllers: { registrations: "users/registrations" }
+
+  authenticated :user do
+    root to: "pages#home"
+  end
+
+  root to: "pages#welcome"
+
   resources :events
 
   resources :users, only: :show do

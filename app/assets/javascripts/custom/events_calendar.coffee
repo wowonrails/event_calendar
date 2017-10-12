@@ -22,7 +22,7 @@ window.EventsCalendar =
         $.ajax
           url: "/events/#{event.id}.js",
           type: 'PUT',
-          data: "event[start]=#{event.start.format()}"
+          data: "event[start]=#{event.start.format()}&event[periodicity]=once"
           error: (request, msg, error) ->
             revertFunc()
 

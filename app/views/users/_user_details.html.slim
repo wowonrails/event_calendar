@@ -10,7 +10,13 @@
 
         .small-8.columns
           =<> user.email
-      br
-      .card
-        = image_tag "full-calendar.jpg"
+
+      - unless policy(user).is_it_me?
+        br
+        br
+        .card
+          .card-section
+            h4
+              | If you want to see my public events
+          = image_tag "follow_me.jpeg"
 
