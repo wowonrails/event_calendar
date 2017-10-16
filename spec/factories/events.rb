@@ -3,9 +3,10 @@ FactoryGirl.define do
     association :user, factory: :user, strategy: :build
 
     title { Faker::Name.title }
-    periodicity %w[once day week month year].sample
-    start { Faker::Date.forward(30) }
+    periodicity { %w[once day week month year].sample }
+    start { Faker::Date.forward(5) }
     duration 0.5
     description { Faker::Lorem.sentence }
+    public { [true, false].sample }
   end
 end

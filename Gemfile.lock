@@ -93,6 +93,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-screenshot (1.0.17)
+      capybara (>= 1.0, < 3)
+      launchy
     case_transform (0.2)
       activesupport
     choice (0.2.0)
@@ -438,6 +441,7 @@ GEM
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.6)
+    timecop (0.9.1)
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
     uglifier (3.0.4)
@@ -474,6 +478,7 @@ DEPENDENCIES
   bundler-audit
   byebug
   capybara
+  capybara-screenshot
   codeclimate-test-reporter
   coffee-rails
   coffeelint
@@ -540,6 +545,7 @@ DEPENDENCIES
   spring-watcher-listen
   stackprof
   terminal-notifier-guard
+  timecop
   uglifier (>= 2.7.2)
   web-console
   webmock

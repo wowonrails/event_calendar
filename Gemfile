@@ -71,6 +71,8 @@ group :test do
   gem "shoulda-matchers"
   gem "terminal-notifier-guard"
   gem "webmock", require: false
+  gem "capybara-screenshot"
+  gem "timecop"
 end
 
 group :development, :test do
