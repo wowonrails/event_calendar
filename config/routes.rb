@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :followed_users, only: :index
     resources :followers,      only: :index
     resources :other_users,    only: :index
-    resources :relationships,  only: [:create, :destroy]
-    resources :events,         only: [:index, :show], controller: 'users/events'
+    resources :relationships,  only: %i[create destroy]
+    resources :events,         only: %i[index show], controller: "users/events"
   end
 end

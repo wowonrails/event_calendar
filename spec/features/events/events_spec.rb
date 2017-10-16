@@ -9,7 +9,7 @@ feature "Manage Events" do
     end
 
     before do
-      Timecop.freeze(Time.local(2017))
+      Timecop.freeze(Time.zone.local(2017))
       visit root_path
       page.evaluate_script("window.calendar.fullCalendar('gotoDate', new Date(2017, 0));")
     end
@@ -24,9 +24,7 @@ feature "Manage Events" do
       expect(page).to have_content("To make the event public?")
 
       within("#js-event-form-new") do
-        fill_form_and_submit(:event, :new, attributes.merge(
-          start: attributes[:start].to_s)
-        )
+        fill_form_and_submit(:event, :new, attributes.merge(start: attributes[:start].to_s))
       end
 
       expect(page).to have_content(attributes[:title])
@@ -34,7 +32,7 @@ feature "Manage Events" do
     end
 
     scenario "User creates event which repeated one per day" do
-      attributes.merge!(start: Date.today.to_s, periodicity: "Day", finish: (Date.today + 1.day).to_s)
+      attributes.merge!(start: Time.zone.today.to_s, periodicity: "Day", finish: (Time.zone.today + 1.day).to_s)
 
       click_link "Create Event"
 
@@ -50,7 +48,7 @@ feature "Manage Events" do
     end
 
     scenario "User creates event which repeated one per week" do
-      attributes.merge!(start: Date.today.to_s, periodicity: "Week", finish: (Date.today + 1.week).to_s)
+      attributes.merge!(start: Time.zone.today.to_s, periodicity: "Week", finish: (Time.zone.today + 1.week).to_s)
 
       click_link "Create Event"
 
@@ -66,7 +64,7 @@ feature "Manage Events" do
     end
 
     scenario "User creates event which repeated one per month" do
-      attributes.merge!(start: Date.today.to_s, periodicity: "Month", finish: (Date.today + 1.month).to_s)
+      attributes.merge!(start: Time.zone.today.to_s, periodicity: "Month", finish: (Time.zone.today + 1.month).to_s)
 
       click_link "Create Event"
 
@@ -82,7 +80,7 @@ feature "Manage Events" do
     end
 
     scenario "User creates event which repeated one per year" do
-      attributes.merge!(start: Date.today.to_s, periodicity: "Year", finish: (Date.today + 1.year).to_s)
+      attributes.merge!(start: Time.zone.today.to_s, periodicity: "Year", finish: (Time.zone.today + 1.year).to_s)
 
       click_link "Create Event"
 
@@ -129,7 +127,7 @@ feature "Manage Events" do
 
         expect(page).to have_content("Update all dependent future events")
 
-        fill_form_and_submit(:event, :edit, { title: "Birthday party" })
+        fill_form_and_submit(:event, :edit, title: "Birthday party")
       end
 
       expect(page).to have_content("Birthday party")

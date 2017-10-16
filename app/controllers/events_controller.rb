@@ -1,13 +1,6 @@
 class EventsController < ApplicationController
-  expose(:event) do
-    if params[:id]
-      events.find(params[:id])
-    else
-      Event.new
-    end
-  end
-
-  expose(:events) { user.events }
+  expose :events, from: :current_user
+  expose :event
   expose(:user) { current_user }
 
   def index
@@ -39,6 +32,8 @@ class EventsController < ApplicationController
 
   def destroy
     event.destroy
+
+    render :destroy
   end
 
   private
@@ -46,7 +41,7 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(
       :title,
-      :public,
+      :social,
       :duration,
       :description,
       :periodicity,

@@ -6,21 +6,23 @@ feature "Follow/unfollow users" do
   let!(:user_one) { create :user }
   let!(:user_two) { create :user }
 
-  let!(:events_of_user_one) { create_list(:event, 5, user: user_one, finish: Time.now.next_month) }
-  let!(:events_of_user_two) { create_list(:event, 5, user: user_two, finish: Time.now.next_week) }
-
-  let!(:relationship) do
-    create(:relationship,
-      follower_id: current_user.id,
-      followed_id: user_two.id
-    )
+  let(:events_of_user_one) do
+    create_list(:event, 5, user: user_one, finish: Time.zone.now.next_month)
   end
 
-  let!(:public_events_of_user_one) { user_one.events.public_events }
-  let!(:public_events_of_user_two) { user_two.events.public_events }
+  let(:events_of_user_two) do
+    create_list(:event, 5, user: user_two, finish: Time.zone.next_week)
+  end
 
-  let!(:private_events_of_user_one) { user_one.events.where(public: false) }
-  let!(:private_events_of_user_two) { user_two.events.where(public: false) }
+  let!(:relationship) do
+    create(:relationship, follower_id: current_user.id, followed_id: user_two.id)
+  end
+
+  let(:public_events_of_user_one) { user_one.events.public_events }
+  let(:public_events_of_user_two) { user_two.events.public_events }
+
+  let(:private_events_of_user_one) { user_one.events.where(social: false) }
+  let(:private_events_of_user_two) { user_two.events.where(social: false) }
 
   background do
     visit root_path

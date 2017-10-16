@@ -50,41 +50,27 @@ class Event < ApplicationRecord
     "22.5 hour": 22.5,
     "23 hour": 23.0,
     "23.5 hour": 23.5
-  }
+  }.freeze
 
   belongs_to :user
 
-  enumerize :periodicity, in: [
-    :once,
-    :day,
-    :week,
-    :month,
-    :year
-  ]
+  enumerize :periodicity, in: %i[once day week month year]
 
-  validates :title,
-            :periodicity,
-            :start,
-            :duration,
-            :description, presence: true
+  validates :title, :periodicity, :start, :duration, :description, presence: true
 
   validates_with EventLimitValidator
 
-  scope :dependent_future_events, -> (event) {
-    where(["title = ? and start > ?", event.title, event.start])
-  }
+  scope :dependent_future_events, ->(event) { where(["title = ? and start > ?", event.title, event.start]) }
 
-  scope :public_events, -> {
-    where(public: true)
-  }
+  scope :public_events, -> { where(social: true) }
 
   def recurring_event!
-    unless periodicity == "once"
-      number_of_repetitions.times do |i|
-        duplicate = dup
-        duplicate.start = start + (i + 1).send(periodicity)
-        duplicate.save
-      end
+    return if periodicity == "once"
+
+    number_of_repetitions.times do |i|
+      duplicate = dup
+      duplicate.start = start + (i + 1).send(periodicity)
+      duplicate.save
     end
   end
 
@@ -95,21 +81,20 @@ class Event < ApplicationRecord
 
   private
 
-  def number_of_repetitions
-    numbers = (finish.to_date - start.to_date).to_i
+  def period_of_time
+    finish.to_date - start.to_date
+  end
 
+  def number_of_repetitions
     case periodicity
     when "day"
-      numbers
-
+      period_of_time.to_i
     when "week"
-      numbers/7
-
+      period_of_time.to_i / 7
     when "month"
-      numbers/30
-
+      period_of_time.to_i / 30
     when "year"
-      numbers/365
+      period_of_time.to_i / 365
     end
   end
 end

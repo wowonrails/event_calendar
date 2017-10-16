@@ -7,6 +7,6 @@ FactoryGirl.define do
     start { Faker::Date.forward(5) }
     duration 0.5
     description { Faker::Lorem.sentence }
-    public { [true, false].sample }
+    social { [true, false].sample }
   end
 end

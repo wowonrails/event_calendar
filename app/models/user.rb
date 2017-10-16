@@ -1,13 +1,7 @@
 class User < ApplicationRecord
   paginates_per 20
 
-  devise :database_authenticatable,
-         :registerable,
-         :confirmable,
-         :recoverable,
-         :rememberable,
-         :trackable,
-         :validatable
+  devise :database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable, :trackable, :validatable
 
   validates :full_name, presence: true
 
@@ -29,9 +23,8 @@ class User < ApplicationRecord
     ids = all.pluck(:id)
     rejected_ids = (
       user.followed_users.pluck(:id) + user.followers.pluck(:id)
-    ).push(user.id)
-     .uniq
+    ).push(user.id).uniq
 
-    where(id: ids.reject{ |id| rejected_ids.include?(id) })
+    where(id: ids.reject { |id| rejected_ids.include?(id) })
   end
 end

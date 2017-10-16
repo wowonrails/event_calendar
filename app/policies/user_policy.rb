@@ -3,7 +3,7 @@ class UserPolicy < ApplicationPolicy
     user.relationships.find_by(followed_id: record.id)
   end
 
-  def is_it_me?
+  def it_me?
     user == record
   end
 end

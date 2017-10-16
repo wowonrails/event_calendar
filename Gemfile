@@ -8,13 +8,16 @@ gem "rails", "5.1.2"
 # assets
 gem "autoprefixer-rails"
 gem "coffee-rails"
+gem "font-awesome-sass"
 gem "foundation-icons-sass-rails"
 gem "foundation-rails"
+gem "fragments.js", github: "fs/fragments.js"
+gem "fullcalendar-rails"
 gem "mini_racer"
+gem "momentjs-rails"
 gem "premailer-rails"
 gem "sass-rails", "~> 5.0.0", ">= 5.0.6"
 gem "uglifier", ">= 2.7.2"
-gem "font-awesome-sass"
 
 source "https://rails-assets.org" do
   gem "rails-assets-jquery-ujs"
@@ -29,10 +32,12 @@ gem "simple_form"
 gem "slim"
 
 # all other gems
+gem "active_model_serializers"
 gem "decent_decoration"
 gem "decent_exposure"
 gem "devise"
 gem "draper"
+gem "enumerize"
 gem "flamegraph"
 gem "google-analytics-rails"
 gem "health_check"
@@ -48,18 +53,13 @@ gem "rollbar"
 gem "seedbank"
 gem "stackprof"
 
-gem "fullcalendar-rails"
-gem "momentjs-rails"
-gem "enumerize"
-gem "active_model_serializers"
-gem "fragments.js", github: "fs/fragments.js"
-
 group :staging, :production do
   gem "newrelic_rpm"
 end
 
 group :test do
   gem "capybara"
+  gem "capybara-screenshot"
   gem "codeclimate-test-reporter", require: false
   gem "database_cleaner"
   gem "email_spec"
@@ -70,9 +70,8 @@ group :test do
   gem "rspec-its"
   gem "shoulda-matchers"
   gem "terminal-notifier-guard"
-  gem "webmock", require: false
-  gem "capybara-screenshot"
   gem "timecop"
+  gem "webmock", require: false
 end
 
 group :development, :test do
