@@ -1,4 +1,10 @@
 en:
+  helpers:
+    submit:
+      event:
+        create: "Add %{model}"
+        update: "Save Changes"
+
   simple_form:
     'yes': Yes
     'no': No
@@ -10,3 +16,8 @@ en:
       # html: '<abbr title="required">*</abbr>'
     error_notification:
       default_message: 'Please review the problems below:'
+    labels:
+      event:
+        periodicity: 'Select the option to repeat the event'
+        duration: 'Select the duration of the event'
+        public: 'To make the event public?'

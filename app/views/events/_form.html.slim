@@ -14,7 +14,6 @@
     .row
       .small-12.columns
         = f.input :periodicity, collection: Event.periodicity.options,
-                                label: "Select the option to repeat the event",
                                 include_blank: false
 
   .row.js-event-start-field
@@ -38,7 +37,6 @@
   .row
     .small-12.columns
       = f.input :duration, collection: Event::DURATION,
-        label: "Select the duration of the event",
         include_blank: false
 
   .row
@@ -47,8 +45,7 @@
 
   .row
     .small-12.columns
-      = f.input :public, label: "To make the event public?",
-        as: :boolean,
+      = f.input :public, as: :boolean,
         checked_value: true,
         unchecked_value: false
   br

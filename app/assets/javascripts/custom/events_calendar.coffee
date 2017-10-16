@@ -1,11 +1,11 @@
 window.EventsCalendar =
   init: (path) ->
-    $('#calendar').fullCalendar
+    window.calendar = $('#calendar').fullCalendar
       firstDay: 1
       header: {
         left:   'today',
         center: 'prev, title, next',
-        right:  'month,listWeek'
+        right:  'month,listMonth,listYear'
       }
       timeFormat: 'H:mm'
       events: "/#{path}.json"
