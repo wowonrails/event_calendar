@@ -9,17 +9,23 @@ feature "Follow/unfollow users" do
   let(:events_of_user_one) { create_list(:event, 5, user: user_one, finish: Time.zone.now.next_month) }
   let(:events_of_user_two) { create_list(:event, 5, user: user_two, finish: Time.zone.now.next_week) }
 
-  let!(:relationship) { create(:relationship, follower_id: current_user.id, followed_id: user_two.id) }
-
   let(:public_events_of_user_one) { user_one.events.public_events }
   let(:public_events_of_user_two) { user_two.events.public_events }
 
-  let!(:check_event) { create(:event, user: user_two, title: "Birthday party", start: Time.zone.now, finish: Time.zone.now.next_week, social: true) }
+  let!(:check_event) do
+    create(:event,
+      user: user_two,
+      title: "Birthday party",
+      start: Time.zone.now,
+      finish: Time.zone.now.next_week,
+      social: true)
+  end
 
   let(:private_events_of_user_one) { user_one.events.where(social: false) }
   let(:private_events_of_user_two) { user_two.events.where(social: false) }
 
   background do
+    create(:relationship, follower_id: current_user.id, followed_id: user_two.id)
     visit root_path
   end
 

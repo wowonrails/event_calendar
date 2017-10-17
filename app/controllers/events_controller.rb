@@ -19,14 +19,16 @@ class EventsController < ApplicationController
   def create
     self.event = events.new(event_params)
 
-    event.recurring_event! if event.save
+    CreateEvents.call(event: event) if event.save
   end
 
   def update
-    old_event = event
+    old_event = Event.find(params[:id])
 
     if event.update(event_params)
-      event.update_dependent_future_events(old_event) if params[:update_future_events]
+      return unless params[:update_future_events]
+
+      UpdateEvents.call(old_event: old_event, event: event)
     end
   end
 

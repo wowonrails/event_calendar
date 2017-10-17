@@ -60,41 +60,5 @@ class Event < ApplicationRecord
 
   validates_with EventLimitValidator
 
-  scope :dependent_future_events, ->(event) { where(["title = ? and start > ?", event.title, event.start]) }
-
   scope :public_events, -> { where(social: true) }
-
-  def recurring_event!
-    return if periodicity == "once"
-
-    number_of_repetitions.times do |i|
-      duplicate = dup
-      duplicate.start = start + (i + 1).send(periodicity)
-      duplicate.save
-    end
-  end
-
-  def update_dependent_future_events(old_event)
-    Event.dependent_future_events(old_event).destroy_all
-    recurring_event!
-  end
-
-  private
-
-  def period_of_time
-    finish.to_date - start.to_date
-  end
-
-  def number_of_repetitions
-    case periodicity
-    when "day"
-      period_of_time.to_i
-    when "week"
-      period_of_time.to_i / 7
-    when "month"
-      period_of_time.to_i / 30
-    when "year"
-      period_of_time.to_i / 365
-    end
-  end
 end

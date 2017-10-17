@@ -17,7 +17,7 @@ class EventLimitValidator < ActiveModel::Validator
   def validate(record)
     return if record.periodicity == "once" || record.start.nil?
 
-    return record.errors.add(:finish, ERROR_MESSAGES[:blank]) if record.finish.nil?
+    check_for_nil(record)
 
     number_of_days = (record.finish.to_date - record.start.to_date).to_i
 
@@ -25,6 +25,10 @@ class EventLimitValidator < ActiveModel::Validator
   end
 
   private
+
+  def check_for_nil(record)
+    return record.errors.add(:finish, ERROR_MESSAGES[:blank]) if record.finish.nil?
+  end
 
   def check_periodicity(record, number_of_days)
     case record.periodicity
