@@ -1,22 +1,25 @@
 class EventLimitValidator < ActiveModel::Validator
   REPETITION_PERIOD = {
-    day: 182,  # divider = 1
-    week: 52,  # divider = 7
-    month: 24, # divider = 30
-    year: 5    # divider = 365
+    day:   182,  # divider = 1
+    week:  52,   # divider = 7
+    month: 24,   # divider = 30
+    year:  5     # divider = 365
   }.freeze
 
   ERROR_MESSAGES = {
-    day: "The period should be no more than six months",
-    week: "The period should be no more than one year",
+    blank: "can't be blank",
+    day:   "The period should be no more than six months",
+    week:  "The period should be no more than one year",
     month: "The period should be no more than two year",
-    year: "The period should be no more than five year"
+    year:  "The period should be no more than five year"
   }.freeze
 
   def validate(record)
     return if record.periodicity == "once" || record.start.nil?
 
-    number_of_days = (record.finish.to_date - record.try(:start).to_date).to_i
+    return record.errors.add(:finish, ERROR_MESSAGES[:blank]) if record.finish.nil?
+
+    number_of_days = (record.finish.to_date - record.start.to_date).to_i
 
     check_periodicity(record, number_of_days)
   end
