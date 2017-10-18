@@ -2,7 +2,7 @@ class RelationshipsController < ApplicationController
   expose :relationship
   expose(:user) { User.find(params[:user_id]) }
   expose(:other_users) do
-    User.other_users(user).order(:full_name).page(params[:page])
+    User.unrelated_users_to(user).order(:full_name).page(params[:page])
   end
 
   def create

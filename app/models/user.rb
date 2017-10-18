@@ -19,12 +19,9 @@ class User < ApplicationRecord
   has_many :followers, through: :reverse_relationships,
                        source: :follower
 
-  def self.other_users(user)
-    ids = all.pluck(:id)
-    rejected_ids = (
-      user.followed_users.pluck(:id) + user.followers.pluck(:id)
-    ).push(user.id).uniq
-
-    where(id: ids.reject { |id| rejected_ids.include?(id) })
+  def self.unrelated_users_to(user)
+    self.where.not(id: user.followed_user_ids)
+        .where.not(id: user.follower_ids)
+        .where.not(id: user.id)
   end
 end

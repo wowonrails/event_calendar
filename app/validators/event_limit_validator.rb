@@ -1,9 +1,9 @@
 class EventLimitValidator < ActiveModel::Validator
   REPETITION_PERIOD = {
-    day:   182, # six months
-    week:  365, # one year
-    month: 730, # two year
-    year:  1825 # five year
+    day:   182, # six months in days
+    week:  365, # one year in days
+    month: 730, # two year in days
+    year:  1825 # five year in days
   }.freeze
 
   ERROR_MESSAGES = {

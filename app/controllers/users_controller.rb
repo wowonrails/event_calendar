@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   expose :user
   expose(:other_users) do
-    User.other_users(user).order(:full_name).page(params[:page])
+    User.unrelated_users_to(user).order(:full_name).page(params[:page])
   end
 
   expose(:relationship) do
