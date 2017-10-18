@@ -58,7 +58,10 @@ class Event < ApplicationRecord
 
   validates :title, :periodicity, :start, :duration, :description, presence: true
 
-  validates_with EventLimitValidator
+  with_options unless: -> { periodicity.once? } do |event|
+    event.validates :finish, presence: true
+    event.validates_with EventLimitValidator, if: -> { start.present? && finish.present? }
+  end
 
   scope :public_events, -> { where(social: true) }
 end
