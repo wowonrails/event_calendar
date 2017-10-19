@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
 
   expose(:relationship) do
-    current_user.relationships.find_by(followed_id: user.id)
+    current_user.active_relationships.find_by(followed_id: user.id)
   end
 
   def show

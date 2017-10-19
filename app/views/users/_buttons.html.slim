@@ -2,13 +2,13 @@
   = link_to user_followed_users_path(user), class: "button secondary",
                                             remote: true,
                                             data: { behavior: "fragments" } do
-    =<> user.followed_users.count
+    =<> user.followed_users_count
     | following
 
   = link_to user_followers_path(user), class: "button secondary",
                                        remote: true,
                                        data: { behavior: "fragments" } do
-    =<> user.followers.count
+    =<> user.followers_count
     | followers
 
   = link_to user_other_users_path(user), class: "button secondary disabled",

@@ -6,7 +6,7 @@ class RelationshipsController < ApplicationController
   end
 
   def create
-    self.relationship = current_user.relationships.create!(followed_id: user.id)
+    self.relationship = current_user.active_relationships.create!(followed_id: user.id)
 
     redirect_to user_path(user)
   end

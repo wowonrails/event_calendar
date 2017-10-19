@@ -1,6 +1,6 @@
 class UserPolicy < ApplicationPolicy
   def following?
-    user.relationships.find_by(followed_id: record.id)
+    user.active_relationships.find_by(followed_id: record.id)
   end
 
   def it_me?

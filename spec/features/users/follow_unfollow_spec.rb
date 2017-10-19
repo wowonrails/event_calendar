@@ -26,6 +26,7 @@ feature "Follow/unfollow users" do
 
   background do
     create(:relationship, follower_id: current_user.id, followed_id: user_two.id)
+    current_user.reload
     visit root_path
   end
 
