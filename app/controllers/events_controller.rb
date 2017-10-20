@@ -23,7 +23,7 @@ class EventsController < ApplicationController
   end
 
   def update
-    old_event = Event.find(params[:id])
+    old_event = event.dup
 
     if event.update(event_params)
       return unless params[:update_future_events]
