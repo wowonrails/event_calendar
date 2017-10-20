@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  expose :user
-  expose(:other_users) do
+  expose_decorated(:user)
+  expose_decorated(:users) do
     User.unrelated_users_to(user).order(:full_name).page(params[:page])
   end
 
