@@ -4,7 +4,7 @@ describe Event do
   describe "#finish" do
     context "when single event" do
       scenario "expect that there are no errors" do
-        subject = Event.new(periodicity: "once")
+        subject = described_class.new(periodicity: "once")
         subject.valid?
 
         expect(subject.errors[:finish]).not_to include("can't be blank")
@@ -13,12 +13,12 @@ describe Event do
 
     context "when recurring event" do
       scenario "expect that there are errors" do
-        subject = Event.new(periodicity: "day", start: Time.zone.now)
+        subject = described_class.new(periodicity: "day", start: Time.zone.now)
         subject.valid?
 
         expect(subject.errors[:finish]).to include("can't be blank")
 
-        subject.finish = Time.zone.now + 5.year
+        subject.finish = Time.zone.now + 5.years
         subject.valid?
 
         expect(subject.errors[:finish]).to include("The period should be no more than six months")

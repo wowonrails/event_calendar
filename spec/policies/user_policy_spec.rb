@@ -1,31 +1,31 @@
 require "rails_helper"
 
 describe UserPolicy do
-  let(:subject) { described_class }
+  subject { described_class.new(current_user, user) }
 
   let(:current_user) { create(:user) }
   let(:user) { create(:user) }
 
-  permissions :following? do
-    scenario "denies access if user does not follow another one" do
-      expect(subject).not_to permit(current_user, user)
-    end
-
-    scenario "grants access if user follows another one" do
-      create(:relationship, follower: current_user, followed: user)
-      current_user.reload
-
-      expect(subject).to permit(current_user, user)
-    end
+  context "user does not follow another one" do
+    it { is_expected.to forbid_action(:following) }
   end
 
-  permissions :it_me? do
-    scenario "denies access if user is not current_user" do
-      expect(subject).not_to permit(current_user, user)
+  context "user follows another one" do
+    before do
+      create(:relationship, follower: current_user, followed: user)
+      current_user.reload
     end
 
-    scenario "grants access if user is current_user" do
-      expect(subject).to permit(current_user, current_user)
-    end
+    it { is_expected.to permit_action(:following) }
+  end
+
+  context "user is not current_user" do
+    it { is_expected.to forbid_action(:it_me) }
+  end
+
+  context "user is current_user" do
+    let(:user) { current_user }
+
+    it { is_expected.to permit_action(:it_me) }
   end
 end

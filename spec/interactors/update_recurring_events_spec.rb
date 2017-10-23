@@ -31,13 +31,9 @@ describe UpdateRecurringEvents do
 
       old_event = my_event.dup
 
-      my_event.update_column(:title, "Birthday party")
+      my_event.update(title: "Birthday party")
 
-      expect {
-        described_class.call(event: my_event, old_event: old_event)
-      }.not_to change {
-        Event.count
-      }
+      expect { described_class.call(event: my_event, old_event: old_event) }.not_to change(Event, :count)
 
       Event.find_each do |event|
         expect(event.title).to eq("Birthday party")

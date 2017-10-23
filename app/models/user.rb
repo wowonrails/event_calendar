@@ -19,8 +19,8 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
 
   def self.unrelated_users_to(user)
-    self.where.not(id: user.followed_user_ids)
-        .where.not(id: user.follower_ids)
-        .where.not(id: user.id)
+    where.not(id: user.followed_user_ids)
+         .where.not(id: user.follower_ids)
+         .where.not(id: user.id)
   end
 end

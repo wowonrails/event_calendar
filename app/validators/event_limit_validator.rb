@@ -14,10 +14,14 @@ class EventLimitValidator < ActiveModel::Validator
   }.freeze
 
   def validate(record)
-    number_of_days = (record.finish.to_date - record.start.to_date).to_i
-
-    return unless REPETITION_PERIOD[record.periodicity.to_sym] < number_of_days
+    return unless REPETITION_PERIOD[record.periodicity.to_sym] < number_of_days(record)
 
     record.errors.add(:finish, ERROR_MESSAGES[record.periodicity.to_sym])
+  end
+
+  private
+
+  def number_of_days(record)
+    (record.finish.to_date - record.start.to_date).to_i
   end
 end

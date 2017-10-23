@@ -25,11 +25,11 @@ class EventsController < ApplicationController
   def update
     old_event = event.dup
 
-    if event.update(event_params)
-      return unless params[:update_future_events]
+    return unless event.update(event_params)
 
-      UpdateRecurringEvents.call(old_event: old_event, event: event)
-    end
+    return unless params[:update_future_events]
+
+    UpdateRecurringEvents.call(old_event: old_event, event: event)
   end
 
   def destroy
