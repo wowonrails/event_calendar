@@ -10,28 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171004101527) do
+ActiveRecord::Schema.define(version: 20171019085450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "events", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.string "periodicity"
-    t.datetime "start"
+    t.string "title", null: false
+    t.text "description", null: false
+    t.string "periodicity", null: false
+    t.datetime "start", null: false
     t.datetime "finish"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.float "duration"
-    t.boolean "public", default: false
+    t.boolean "social", default: false
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "followed_id"
+    t.integer "follower_id", null: false
+    t.integer "followed_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(version: 20171004101527) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "full_name", limit: 255
+    t.integer "followers_count", default: 0
+    t.integer "followed_users_count", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

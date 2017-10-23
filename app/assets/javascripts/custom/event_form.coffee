@@ -3,6 +3,11 @@ window.EventForm =
     EventForm.toggle_fields()
 
   toggle_fields: () ->
+    $(document).ajaxComplete () ->
+      $('.js-event-finish-field').removeClass('hide') unless $('#event_periodicity').val() == "once"
+
+      return
+
     $(document).on 'change', '#event_periodicity', ->
       if $(this).val() == "once"
         $('.js-event-finish-field').addClass('hide')

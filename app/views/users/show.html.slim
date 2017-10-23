@@ -1,18 +1,18 @@
 .row
   .columns
-    h4 = title(policy(user).is_it_me? ? "My Profile" : "#{user.full_name}")
+    h4 = title(policy(user).it_me? ? "My Profile" : "#{user.full_name}")
 br
 .row
   .medium-8.columns
     = render 'users/user_details'
 
   .medium-4.columns
-    = render 'users/follow_form' unless policy(user).is_it_me?
+    = render 'users/follow_form' unless policy(user).it_me?
 
     = render 'users/buttons'
 
     hr
-    = render 'users/list', users: other_users
+    = render 'users/list', users: users
     hr
 
 = content_for(:javascript_code) do

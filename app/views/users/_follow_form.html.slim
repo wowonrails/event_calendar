@@ -1,11 +1,10 @@
 - if policy(user).following?
-  = link_to user_relationship_path(user, relationship), method: :delete,
-                                         class: "button alert small expanded follow-form",
-                                         data: { confirm: "Are you sure?" } do
+  = button_to user_relationship_path(user, relationship), method: :delete,
+                                                          class: "button alert small expanded follow-form",
+                                                          data: { confirm: "Are you sure?" } do
     strong
       | Unfollow
 - else
-  = link_to user_relationships_path(user), method: :post,
-                                           class: "button small expanded follow-form" do
+  = button_to user_relationships_path(user), class: "button small expanded follow-form" do
     strong
       | Follow

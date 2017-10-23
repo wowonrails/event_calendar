@@ -30,7 +30,7 @@
             strong Duration:
 
           .small-8.columns
-            =<> Event::DURATION.index(event.duration)
+            =<> Event::DURATION.key(event.duration)
 
         - if event.finish
           .row
@@ -40,7 +40,7 @@
             .small-8.columns
               =<> event.finish.strftime("%d-%m-%Y")
 
-      - if current_user == user
+      - if policy(user).it_me?
         .row
           .small-8.columns
           .small-4.columns

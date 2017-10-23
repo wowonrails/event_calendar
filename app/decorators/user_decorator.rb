@@ -1,7 +1,7 @@
 class UserDecorator < ApplicationDecorator
-  delegate :id, :full_name, :email
+  delegate :id, :full_name, :email, :followed_users_count, :followers_count, to: :object
 
   def full_name_with_email
-    "#{object.full_name} (#{object.email})"
+    "#{full_name} (#{email})"
   end
 end

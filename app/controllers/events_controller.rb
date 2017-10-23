@@ -1,13 +1,6 @@
 class EventsController < ApplicationController
-  expose(:event) do
-    if params[:id]
-      events.find(params[:id])
-    else
-      Event.new
-    end
-  end
-
-  expose(:events) { user.events }
+  expose :events, from: :current_user
+  expose :event
   expose(:user) { current_user }
 
   def index
@@ -26,19 +19,23 @@ class EventsController < ApplicationController
   def create
     self.event = events.new(event_params)
 
-    event.recurring_event! if event.save
+    CreateRecurringEvents.call(event: event) if event.save
   end
 
   def update
-    old_event = event
+    old_event = event.dup
 
-    if event.update(event_params)
-      event.update_dependent_future_events(old_event) if params[:update_future_events]
-    end
+    return unless event.update(event_params)
+
+    return unless params[:update_future_events]
+
+    UpdateRecurringEvents.call(old_event: old_event, event: event)
   end
 
   def destroy
     event.destroy
+
+    render :destroy
   end
 
   private
@@ -46,7 +43,7 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(
       :title,
-      :public,
+      :social,
       :duration,
       :description,
       :periodicity,

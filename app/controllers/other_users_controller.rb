@@ -1,8 +1,8 @@
 class OtherUsersController < ApplicationController
-  expose(:user) { User.find(params[:user_id]) }
+  expose_decorated(:user) { User.find(params[:user_id]) }
 
-  expose(:users) do
-    User.other_users(user).order(:full_name).page(params[:page])
+  expose_decorated(:users) do
+    User.unrelated_users_to(user).order(:full_name).page(params[:page])
   end
 
   def index

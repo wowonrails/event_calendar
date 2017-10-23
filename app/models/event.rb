@@ -50,66 +50,18 @@ class Event < ApplicationRecord
     "22.5 hour": 22.5,
     "23 hour": 23.0,
     "23.5 hour": 23.5
-  }
+  }.freeze
 
   belongs_to :user
 
-  enumerize :periodicity, in: [
-    :once,
-    :day,
-    :week,
-    :month,
-    :year
-  ]
+  enumerize :periodicity, in: %i[once day week month year]
 
-  validates :title,
-            :periodicity,
-            :start,
-            :duration,
-            :description, presence: true
+  validates :title, :periodicity, :start, :duration, :description, presence: true
 
-  validates_with EventLimitValidator
-
-  scope :dependent_future_events, -> (event) {
-    where(["title = ? and start > ?", event.title, event.start])
-  }
-
-  scope :public_events, -> {
-    where(public: true)
-  }
-
-  def recurring_event!
-    unless periodicity == "once"
-      number_of_repetitions.times do |i|
-        duplicate = dup
-        duplicate.start = start + (i + 1).send(periodicity)
-        duplicate.save
-      end
-    end
+  with_options unless: -> { periodicity.once? } do |event|
+    event.validates :finish, presence: true
+    event.validates_with EventLimitValidator, if: -> { start.present? && finish.present? }
   end
 
-  def update_dependent_future_events(old_event)
-    Event.dependent_future_events(old_event).destroy_all
-    recurring_event!
-  end
-
-  private
-
-  def number_of_repetitions
-    numbers = (finish.to_date - start.to_date).to_i
-
-    case periodicity
-    when "day"
-      numbers
-
-    when "week"
-      numbers/7
-
-    when "month"
-      numbers/30
-
-    when "year"
-      numbers/365
-    end
-  end
+  scope :public_events, -> { where(social: true) }
 end

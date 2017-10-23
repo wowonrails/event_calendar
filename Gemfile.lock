@@ -1,15 +1,15 @@
 GIT
-  remote: git://github.com/fs/fragments.js.git
-  revision: 4d786b7a53ccc487dec3008e789aaaf14b8b0c5d
-  specs:
-    fragments.js (0.0.1)
-
-GIT
   remote: https://github.com/MiniProfiler/rack-mini-profiler.git
   revision: 1b79f49f36dfe16f7a8c9c75753decb37bec186c
   specs:
     rack-mini-profiler (0.10.2)
       rack (>= 1.2.0)
+
+GIT
+  remote: https://github.com/fs/fragments.js
+  revision: 4d786b7a53ccc487dec3008e789aaaf14b8b0c5d
+  specs:
+    fragments.js (0.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -294,6 +294,9 @@ GEM
     puma (3.9.1)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
+    pundit-matchers (1.3.1)
+      pundit (~> 1.1, >= 1.1.0)
+      rspec-rails (>= 3.0.0)
     rack (2.0.3)
     rack-canonical-host (0.2.2)
       addressable (> 0, < 3)
@@ -520,6 +523,7 @@ DEPENDENCIES
   pry-rails
   puma
   pundit
+  pundit-matchers
   rack-canonical-host
   rack-mini-profiler!
   rails (= 5.1.2)

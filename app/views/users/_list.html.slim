@@ -1,6 +1,6 @@
 .js-users-list data-fragment-id="js-users-list"
   ul.no-bullet
-    - users.find_each do |user|
+    - users.each do |user|
       li
         = link_to user_path(user) do
           = user.full_name

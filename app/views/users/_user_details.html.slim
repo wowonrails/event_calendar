@@ -11,7 +11,7 @@
         .small-8.columns
           =<> user.email
 
-      - unless policy(user).is_it_me?
+      - unless policy(user).it_me?
         br
         br
         .card

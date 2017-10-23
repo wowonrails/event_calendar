@@ -20,4 +20,4 @@ en:
       event:
         periodicity: 'Select the option to repeat the event'
         duration: 'Select the duration of the event'
-        public: 'To make the event public?'
+        social: 'To make the event public?'
