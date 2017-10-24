@@ -1,34 +1,21 @@
-# Project name
+# EventCalendar
 
-Third-party service badges (if available)
-
-[![Build Status](https://semaphoreapp.com/api/v1/projects/31b68af8b073708a56e4e005bbcba2af4802816d/76140/shields_badge.png)](https://semaphoreapp.com/fs/rails-base)
-[![Test Coverage](https://codeclimate.com/github/fs/rails-base/badges/coverage.svg)](https://codeclimate.com/github/fs/rails-base)
-[![Code Climate](https://codeclimate.com/github/fs/rails-base.png)](https://codeclimate.com/github/fs/rails-base)
+[![Build Status](https://semaphoreci.com/api/v1/wowonrails/event_calendar/branches/master/shields_badge.svg)](https://semaphoreci.com/wowonrails/event_calendar)
+[![Maintainability](https://api.codeclimate.com/v1/badges/1cf846afa985567d64ab/maintainability)](https://codeclimate.com/github/wowonrails/event_calendar/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/1cf846afa985567d64ab/test_coverage)](https://codeclimate.com/github/wowonrails/event_calendar/test_coverage)
 
 ## Project description
 
-Some short project description. Link to Basecamp project will be fine too.
+Web-application allows you to create personal private and public events, view public events of other users (https://github.com/wowonrails/event_calendar)
 
-## Dependencies
-
-* PostgreSQL 9.3
-* Ruby 2.2.3
-* PhantomJS
-* Rails 4
-
-Setup required dependencies from `Brewfile`:
-```bash
-brew tap Homebrew/bundle
-brew bundle
-```
+Based on https://github.com/fs/rails-base
 
 ## Quick Start
 
 ```bash
 # clone repo
-git clone git@github.com:account/repo.git
-cd repo
+git@github.com:wowonrails/event_calendar.git
+cd event_calendar
 
 # run setup script
 bin/setup
@@ -46,10 +33,6 @@ bin/server
 * `bin/quality` - run brakeman and rails_best_practices for the app
 * `bin/ci` - should be used in the CI to run specs
 
-## Staging
-
-* http://fs-rails-base.herokuapp.com
-
 ## Production
 
-* http://fs-rails-base.herokuapp.com
+* https://event-calendar-wowaonrails.herokuapp.com/
