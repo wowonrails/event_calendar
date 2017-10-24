@@ -63,5 +63,5 @@ class Event < ApplicationRecord
     event.validates_with EventLimitValidator, if: -> { start.present? && finish.present? }
   end
 
-  scope :public_events, -> { where(social: true) }
+  scope :public_events, (-> { where(social: true) })
 end
