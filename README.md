@@ -6,7 +6,7 @@
 
 ## Project description
 
-Web-application allows you to create personal private and public events, view public events of other users (https://github.com/wowonrails/event_calendar)
+Web-application allows you to create personal private and public events, follow up other users and view them public events (https://github.com/wowonrails/event_calendar)
 
 Based on https://github.com/fs/rails-base
 

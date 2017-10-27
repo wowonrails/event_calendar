@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  paginates_per 5
+  paginates_per 20
 
   devise :database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable, :trackable, :validatable
 
