@@ -36,7 +36,7 @@
 
   .row
     .small-12.columns
-      = f.input :duration, collection: Event::DURATION,
+      = f.input :duration, collection: Event.durations,
         include_blank: false
 
   .row
